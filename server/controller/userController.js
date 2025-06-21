@@ -1,6 +1,4 @@
-// import { HttpProxy } from "vite"
 import { user } from "../model/userModel.js"
-// import User from ../models/user
 import { asyncHandler } from "../utilities/asyncHandler.js"
 import { errorHandler } from "../utilities/errorHandler.js"
 import bcrypt from "bcryptjs"
@@ -19,7 +17,8 @@ export const register = asyncHandler(async (req, res, next) => {
     }
 
     const gen = gender === "male" ? "boy" : "girl"
-    const avatar = `https://avatar.iran.liara.run/public/${gen}?username=${username}`
+    
+    //  const avatar = `https://avatar.iran.liara.run/public/${gen}?username=${username}`
     const hashedPassword = await bcrypt.hash(password, 10)
     const newUser = await user.create({
         fullName,
@@ -37,7 +36,7 @@ export const register = asyncHandler(async (req, res, next) => {
     res.status(200)
         .cookie('token', token, {
             expires: new Date(
-                Date.now() + process.env.COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+                Date.now() + 30 * 1000
             ),
             httpOnly: true,
             secure: true,
@@ -53,7 +52,7 @@ export const register = asyncHandler(async (req, res, next) => {
             }
         })
 
-    
+
 
 
 
@@ -85,9 +84,7 @@ export const login = asyncHandler(async (req, res, next) => {
     })
     res.status(200)
         .cookie('token', token, {
-            expires: new Date(
-                Date.now() + process.env.COOKIE_EXPIRES * 24 * 60 * 60 * 1000
-            ),
+           expires: new Date(Date.now() + process.env.COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
             httpOnly: true,
             secure: true,
             sameSite: 'none',
@@ -103,7 +100,7 @@ export const login = asyncHandler(async (req, res, next) => {
         })
 
 
-  
+
 
 
 

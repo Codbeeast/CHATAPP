@@ -1,45 +1,31 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedUsers } from '../../store/slice/user/userslice'
-
+import {boy,girl} from '../../url/ImageUrl'
 const User = ({ user }) => {
     const dispatch = useDispatch()
     const { selectedUsers } = useSelector(state => state.userReducer)
     const { messages } = useSelector(state => state.messageReducer)
-     const {onlineUsers}= useSelector(state=>state.socketReducer)
+    const { onlineUsers } = useSelector(state => state.socketReducer)
     const userIsOnline = Array.isArray(onlineUsers) && onlineUsers.includes(user?._id);
 
-//    const userIsOnline=onlineUsers.includes(user?._id)
-//    console.log("🔹 Current User ID:", user?._id);
-//    console.log("🔹 Online Users from Redux:", onlineUsers);
-//    console.log("🔹 Is User Online?", userIsOnline);
+    const url=user?.gender=='male'?boy:girl
     const handleClick = async () => {
         dispatch(setSelectedUsers(user))
     }
     return (
-        <div onClick={handleClick} className={`flex items-center gap-4  hover:bg-gray-600 rounded-2xl p-3 cursor-pointer ${user?._id === selectedUsers?._id && 'bg-gray-700'}`} >
-            <div className={`${userIsOnline && 'avatar avatar-online'}`}>
-                <div className="w-14 rounded-full">
-                    <img src= {user?.avatar} />
+        <div onClick={handleClick} className={`flex ml-5 sm:ml-8 lg:ml-0 md:ml-0  items-center gap-3 sm:gap-4 p-3 rounded-xl cursor-pointer hover:bg-gray-600 ${user?._id === selectedUsers?._id ? 'bg-gray-700' : ''}`}>
+            <div className={`avatar ${userIsOnline ? 'avatar-online' : ''}`}>
+                <div className="w-10 sm:w-14 rounded-full">
+                    <img src={url} />
                 </div>
             </div>
-            <div>
-                <h2 className='line-clamp-1 text-xl'>{user?.fullName}</h2>
-
-                {Array.isArray(messages) && messages.length > 0 && (
-                    <p className="text-sm text-gray-400">
-                        {messages
-                            .filter((msg) => String(msg?.receiverId) === String(user?._id)) // Ensure proper matching
-                            .slice(-1) // Show only the last message
-                            .map((msg) => (
-                                <span key={msg?._id}></span>
-                            ))}
-                    </p>
-                )}
-
-
+            <div className="flex flex-col">
+                <h2 className="text-sm sm:text-lg font-semibold truncate">{user?.fullName}</h2>
+                <p className="text-xs sm:text-sm text-gray-400 truncate">
+                    {messages?.filter((msg) => String(msg?.receiverId) === String(user?._id)).slice(-1).map((msg) => (<span key={msg?._id}></span>))}
+                </p>
             </div>
-
         </div>
     )
 }

@@ -39,13 +39,13 @@ const Home = () => {
     dispatch(initializeSocket(userProfile?.profile?._id))
   },[isAuthenticated,userProfile])
   return (
-    <div className='flex'>
-      <UserSidebar/>
-      <MessageContainer/>
-      
-             
+    <div className="flex h-screen w-full overflow-hidden">
+  <UserSidebar />
+  <div className="flex-1">
+    <MessageContainer />
+  </div>
+</div>
 
-    </div>
   )
 }
 

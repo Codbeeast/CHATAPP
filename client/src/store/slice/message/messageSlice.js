@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-// import { getOthersProfileThunk, getProfileThunk, loginUserThunk, logOutUserThunk, registerUserThunk } from './useThunk'
 import { getMessageThunk, sendMessageThunk } from './messageThunk';
-// import { setSelectedUsers } from '../user/userslice';
 import { useSelector } from 'react-redux';
 
 
@@ -16,7 +14,6 @@ export const messageSlice = createSlice({
   },
   reducers: {
     setNewMess:(state,action)=>{
-      // const { selectedUsers } = useSelector(state => state.userReducer);
      state.messages = [...(state.messages || []), action.payload];  // ✅ Default to []
     }
   },
@@ -42,7 +39,6 @@ export const messageSlice = createSlice({
       state.buttonLoading = true;
     });
     builder.addCase(getMessageThunk.fulfilled, (state, action) => {
-     console.log(action.payload?.responseData?.convo?.messages)
      state.messages=action.payload?.responseData?.convo?.messages
       state.screenLoading = false; // ✅ Stop loading after registration
     });

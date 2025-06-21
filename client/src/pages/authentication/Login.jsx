@@ -35,6 +35,7 @@ const Login = () => {
         if (isAuthenticated) {
             navigate('/');  // Redirect after component mounts
         }
+       
     }, [isAuthenticated, navigate]); // Runs when `isAuthenticated` changes
 
     return (

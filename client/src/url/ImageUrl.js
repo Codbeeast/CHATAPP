@@ -1,0 +1,2 @@
+export const boy='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQBIN9dh1Bb0TJ8CsAVxewfNu8162DZYcKMGMLzwLujM5nCh3NIegrAjw&s'
+export const girl='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRiCijE3Ha1UkUxhvFSp4YqjSqyEeBDW-t4fUr13__Zcf_bMcUaA36f_U&s'

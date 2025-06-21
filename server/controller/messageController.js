@@ -1,13 +1,7 @@
-// import { HttpProxy } from "vite"
-import { user } from "../model/userModel.js"
 import {conversation} from "../model/conversationModel.js"
 import {Message} from "../model/messageModel.js"
-// import User from ../models/user
 import { asyncHandler } from "../utilities/asyncHandler.js"
 import { errorHandler } from "../utilities/errorHandler.js"
-import bcrypt from "bcryptjs"
-import jwt from 'jsonwebtoken'
-// import { message } from './../model/messageModel';
 import {io,getSocketId} from './.././socket.js'
 
 
@@ -63,7 +57,7 @@ export const getMess = asyncHandler(async(req, res, next) => {
     const itsId=req.params.itsId
    
    
-    // console.log(senderId,receiverId,message)
+  
     if (!myId ||!itsId) {
        return next(new errorHandler('All fields are required',400))
 

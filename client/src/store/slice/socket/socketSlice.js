@@ -21,7 +21,6 @@ export const socketSlice = createSlice({
         
     },
     setOnlineUsers:(state,action) => {
-        console.log("🚀 Updating online users in Redux:", action.payload);
         state.onlineUsers = action.payload
     }
   },

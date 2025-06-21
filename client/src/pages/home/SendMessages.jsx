@@ -8,36 +8,30 @@ const SendMessages = () => {
   const[message,setMessage]= useState("")
   const dispatch=useDispatch()
   const onSend=()=>{
-    // console.log(selectedUsers?._id,message)
     dispatch(sendMessageThunk({receiverId:selectedUsers?._id,message})
 )
 setMessage("")
 }
   return (
     
-        <div className='w-full p-3 flex gap-2 '>
-                              <input
-                                value={message}
-                                onKeyPress={(e)=>{
-                                  if(e.key === 'Enter'){
-                                        onSend()
-                                  }
-                                }
-                                  
-                                }
-                              onChange={(e)=>{
-                                    setMessage(e.target.value)
-    
-                              }}
-                                  type="text"
-                                  placeholder="Type here..."
-                                  className="input input-bordered input-primary w-full text-lg tracking-wide text-white " style={{ fontFamily: "Inter, sans-serif" }}  
-                              />
-                              <button onClick={onSend} className="btn  p-1 btn-circle btn-outline text-[100px]  hover:scale-110 bg-green-400 text-black border border-green-400 transition-all duration-400 ease-in-out  ">
-                                  <IoIosSend />
-                              </button>
-                          </div>
-    
+        <div className="w-full p-3 flex gap-2 items-center">
+  <input
+    value={message}
+    onKeyPress={(e) => e.key === 'Enter' && onSend()}
+    onChange={(e) => setMessage(e.target.value)}
+    type="text"
+    placeholder="Type here..."
+    className="input input-bordered w-full ml-5 sm:ml-8 lg:ml-0 md:ml-0  text-sm sm:text-base text-white bg-gray-800"
+  />
+  <button
+    onClick={onSend}
+    className="btn btn-circle bg-green-400 text-black hover:scale-110 transition-transform"
+  >
+    <IoIosSend size={22} />
+  </button>
+</div>
+
+
   )
 }
 
