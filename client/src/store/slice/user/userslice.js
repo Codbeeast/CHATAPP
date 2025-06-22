@@ -1,20 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { getOthersProfileThunk, getProfileThunk, loginUserThunk, logOutUserThunk, registerUserThunk } from './useThunk'
 
-const savedAuthState = JSON.parse(localStorage.getItem('isAuthenticated'));
-const savedUserProfile = JSON.parse(localStorage.getItem('userProfile'));
-const savedOtherUsers = JSON.parse(localStorage.getItem('otherUsers'));
+function safeJSONParse(value, fallback) {
+  try {
+    return value ? JSON.parse(value) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+const savedAuthState = safeJSONParse(localStorage.getItem("isAuthenticated"), false);
+const savedUserProfile = safeJSONParse(localStorage.getItem("userProfile"), null);
+const savedOtherUsers = safeJSONParse(localStorage.getItem("otherUsers"), []);
+const savedSelectedUsers = safeJSONParse(localStorage.getItem("selectedUsers"), null);
 
 export const userSlice = createSlice({
   name: 'user',
-  initialState: {
-    isAuthenticated: savedAuthState||false,
-    screenLoading: true,
-    userProfile: savedUserProfile||null,
-    buttonLoading: false,
-    otherUsers:savedOtherUsers||[],
-    selectedUsers:JSON.parse(localStorage.getItem("selectedUsers"))
-  },
+ initialState: {
+  isAuthenticated: savedAuthState,
+  screenLoading: true,
+  userProfile: savedUserProfile,
+  buttonLoading: false,
+  otherUsers: savedOtherUsers,
+  selectedUsers: savedSelectedUsers,
+},
   reducers: {
     setSelectedUsers:(state,action)=>{
       localStorage.setItem("selectedUsers",JSON.stringify(action.payload))
