@@ -13,7 +13,7 @@ import {io,app,server} from './socket.js'
 
 connectDB()
 app.use(cors(
-    { origin: 'http://localhost:5173', credentials: true }  //for react app to communicate with this server
+    { origin: ['http://localhost:5173',process.env.URL], credentials: true }  //for react app to communicate with this server
 
 ))
 app.use(cookieParser())
